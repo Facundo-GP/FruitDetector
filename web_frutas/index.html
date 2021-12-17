@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FruitDetector</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+  </head>
+  <body>
+
+    <div class="loader"><img src="assets/images/loader.gif" alt=""> </div>
+    <div class="flex-container">
+
+      <nav class="menu" id='top-menu'>
+
+          <div class="menu-logo">
+            <img src="assets/images/fing.png" alt="">
+          </div>
+
+          <div class="menu-logo">
+            <img src="assets/images/iie.png" alt="">
+          </div>
+
+          <div class="menu-logo" id="last-logo">
+            <img src="assets//images/dps.png" alt="">
+          </div>
+
+          <div class="menu-item">
+            <a href="index.html">Introducción</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href="metodologia.html" >Metodología</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href="detector.html" >Detector</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href ="experimentos.html">Experimentos</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href="resultados.html">Resultados</a>
+            <div class="line"></div>
+          </div>
+
+      </nav>
+        <div class="title">
+          <div class="fruit-detector-container">
+            <div id="fruit-loading">
+              <h1>Fruit</h1>
+            </div>
+            <div id="detector-loading">
+              <h1>Detector</h1>
+            </div>
+          </div>
+          <p id="subtitle-loading">Implementación de un detector y contador de frutas</p>
+        </div>
+
+
+      <div class="main">
+        <div class="side">
+
+        </div>
+
+        <div class="content">
+          <h2>Introducción</h2>
+          <p>
+             El problema al que nos enfrentamos es, dada una imágen de una bandeja con frutas, contar
+             y localizar las frutas en la imágen.
+          </p><br>
+          <p>
+             Para esto utilizaremos una base de datos de Kaggle, la cual cuenta con imágenes de bandejas
+             con 16 tipos de frutas, en varias cantidades y posiciones.
+          </p><br>
+          <p>
+             Consideraciones a tener en cuenta de la base de datos:
+          </p>
+
+          <ul>
+            <li>
+                En todas las imágenes aparece un solo tipo de fruta por bandeja, es decir que no hay imágenes de
+                bandejas con varios tipos de frutas en ella.
+            </li>
+            <li>
+                Todas tienen el mismo fondo, que es el de la bandeja plateada. (Puede tener eventualmente distinta iluminación)
+            </li>
+            <li>
+                El ángulo de captura de la imágen, al igual que la distancia a la bandeja es aproximadamente constante
+                en todas las imágenes. (Puede tener pequeñas variaciones)
+            </li>
+            <li>
+                Hay imágenes de bandejas tanto con una sola fruta, como con varias, llegando a alcanzar la decena.
+            </li>
+            <li>
+                Las imágenes están etiquetadas por tipo de fruta (pues era el objetivo original del problema planteado
+                con el dataset) pero no según cantidad de frutas o su posición.
+            </li>
+          </ul>
+          <div style="display:flex; flex-direction:column; padding-top:4%;">
+              <div style="display:flex; flex-direction:row">
+                 <img src="assets/images/intro/ejemplo_ds_1.png" style="margin-left: auto;margin-right: 5%; transform: scale(1.3); width:20%; height:auto;">
+                 <img src="assets/images/intro/ejemplo_ds_2.png" style="margin-left: 5%;margin-right: auto; transform: scale(1.3);  width:20%; height:auto;">
+              </div>
+              <p class="desc">Ejemplos de imágenes del dataset</p>
+          </div>
+          <p>
+             A partir del análisis de la base de datos identificamos las siguientes dificultades en pos de nuestro objetivo:
+          </p>
+
+          <ul>
+            <li>
+                Las imágenes no están etiquetadas ni por posición ni por cantidad, por lo cual si queremos evaluar el sistema
+                que realizamos cuantitativamente deberemos etiquetarlas manualmente así sea por cantidad.
+            </li>
+            <li>
+                La iluminación de la imágen genera reflejos tanto en la bandeja como en la superficie de algunas frutas lisas,
+                generando manchas luminosas en la imágen.
+            </li>
+            <li>
+                Las mismas frutas se reflejan en la bandeja, haciendo que se confunda la fruta de su reflejo.
+            </li>
+            <li>
+                Hay situaciones en que hay mucha oclusión entre frutas, haciendo que sea bastante difícil identificarlas por separado.
+            </li>
+          </ul>
+          <div style="display:flex; flex-direction:column; padding-top:4%;">
+              <div style="display:flex; flex-direction:row">
+                 <img src="assets/images/intro/problemas.png" style="margin-left: auto;margin-right: auto; transform: scale(1.5);  width:20%; height:auto;">
+              </div>
+              <p class="desc">Ejemplo de problemas</p>
+          </div>
+
+          <p>
+            Para abordar el problema con el tiempo disponible y con las herramientas del curso se decidieron
+            tener las siguientes consideraciones:
+          </p><br>
+
+          <ul>
+            <li>
+                No vamos a trabajar con con los 16 tipos de frutas, sólo con 6 de ellas, seleccionadas de modo
+                que el problema mantuviera parte de la complejidad original pero sin excederse. Por esta misma
+                razón se seleccionaron frutas que fueran bastante distintas entre ellas en pos de mantener la
+                diversidad del problema original.
+            </li>
+            <li>
+                Tampoco se va a usar todo el dataset de cada fruta, puesto que sería inviable etiquetar todas las
+                imágenes, por lo que se decidió crear un subset para cada una de las frutas seleccionadas, de unos
+                60 elementos por fruta, etiquetadas por cantidad manualmente.
+            </li>
+            <li>
+                No se van a etiquetar posiciones, debido a la dificultad de lo mismo. Por lo tanto esta característica
+                se juzgará cualitativamente al ver los resultados.
+            </li>
+          </ul>
+          <br><br><br><br><br><br>
+
+
+        </div>
+
+        <div class="side">
+
+        </div>
+
+      </div>
+
+      <div class="footer">
+
+        <a href="https://github.com/Facundo-GP/FruitDetector">Código completo del proyecto</a>
+
+        <div class="footer-title">
+          <h1>Integrantes</h1>
+        </div>
+
+        <div class="integrant-container">
+          <div class="integrant">
+            <p>Ivan Abatte</p>
+            <p>CI: 4.966.568-1</p>
+            <p>Mail: ivanabatte@gmail.com</p>
+          </div>
+          <div class="integrant">
+            <p>Facundo Guillén</p>
+            <p>CI: 5.202.598-9</p>
+            <p>Mail: facundoguiper@gmail.com</p>
+
+
+          </div>
+          <div class="integrant">
+            <p>Santiago Sarachu</p>
+            <p>CI: 5.265.161-1</p>
+            <p>Mail: santiago.sarachu@gmail.com</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.menu-item {
+  height: 40px;
+  padding: 20px;
+  padding-top: 25px;
+}
+
+#last-logo{
+  margin-right: 20%;
+}
+
+.line {
+  height: 2px;
+  width: 100%;
+}
+
+
+@keyframes line-animation {
+        0% {width: 0%;}
+        100% {width: 100%;}
+    }
+
+.menu-item:hover > .line {
+  background: red;
+  animation: line-animation 0.1s linear;*/
+  }
+
+.menu-item a {
+  margin: auto;
+}
+
+.menu-item a:link {
+  font-size: 25px;
+  font-family: 'Helvetica Neue', sans-serif;
+  color: rgb(255,255,255,1.0);
+  text-decoration: none;
+}
+
+.menu-item a:visited {
+  font-size: 25px;
+  font-family: 'Helvetica Neue', sans-serif;
+  color: rgb(255,255,255,1.0);
+  text-decoration: none;
+}
+
+
+@keyframes link-animation {
+        0% {color: white;}
+        100% {color: red;}
+    }
+
+.menu-item:hover > a {
+  animation: link-animation linear 0.2s;
+  animation-fill-mode: forwards;
+}

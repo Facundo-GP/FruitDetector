@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FruitDetector</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+
+    <div class="loader"><img src="assets/images/loader.gif" alt=""> </div>
+    <div class="flex-container">
+
+      <nav class="menu" id='top-menu'>
+
+          <div class="menu-logo">
+            <img src="assets/images/fing.png" alt="">
+          </div>
+
+          <div class="menu-logo">
+            <img src="assets/images/iie.png" alt="">
+          </div>
+
+          <div class="menu-logo" id="last-logo">
+            <img src="assets//images/dps.png" alt="">
+          </div>
+
+          <div class="menu-item">
+            <a href="index.html">Introducción</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href="metodologia.html" >Metodología</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href="detector.html" >Detector</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href ="experimentos.html">Experimentos</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href="resultados.html">Resultados</a>
+            <div class="line"></div>
+          </div>
+
+      </nav>
+        <div class="title">
+          <div class="fruit-detector-container">
+            <div id="fruit-loading">
+              <h1>Fruit</h1>
+            </div>
+            <div id="detector-loading">
+              <h1>Detector</h1>
+            </div>
+          </div>
+          <p id="subtitle-loading">Implementación de un detector y contador de frutas</p>
+        </div>
+
+
+      <div class="main">
+        <div class="side">
+
+        </div>
+
+        <div class="content">
+          <h2>Detector</h2>
+          <p>
+            Para la etapa de detección usamos dos enfoques bastante distintos dependiendo del tipo de fruta, y a su vez
+            estos finamente ajustados para cada tipo de fruta. Por esta razón es que necesitamos de antemano determinar el
+            tipo de fruta, para poder aplicar el proceso de detección ideal.
+          </p><br>
+
+          <div style="display:flex; flex-direction:column; padding-top:5%;">
+              <div style="display:flex; flex-direction:row">
+                 <img src="assets/images/detector/detector.png" style="margin-left: auto;margin-right: auto;  width:75%; height:auto;
+                                                                        padding-left:2%;">
+              </div>
+              <p class="desc" style="padding-top: 0%;padding-bottom:6%;">Diagrama del detector</p>
+          </div>
+
+          <p>Se detallan a continuación los dos enfoques abordados:</p>
+
+          <ul>
+            <li>
+                <b>Detección de círculos (Naranjas, manzanas, kiwis y ciruelas):</b><br><br>
+                En caso de ser una imágen de ciruelas,
+                directamente se usa el detector de círculos de Hough sobre la imágen, con los parámetros del mismo elegidos
+                según las dimensiones de las ciruelas.<br><br>
+                En caso de ser alguna de las otras tres frutas, es factible aplicar
+                el mismo procedimiento usado para la clasificación para obtener la máscara y remover el fondo (pues son frutas
+                con color), y sobre la imágen sin fondo aplicar ahora el detector de círculos con los parámetros apropiados
+                para cada fruta.<br><br>
+                Una vez reconocidos los círculos, simplemente basta contarlos para saber el número de frutas en la imágen, y
+                la sección del círculo será la de la fruta.
+            </li>
+            <li>
+                <b>Operaciones morfológicas (Bananas y mangos):</b><br><br>
+                Como estas frutas también tienen color, se binarizan igual que
+                en clasificación. Como no son redondas se tiene que usar otra técnica.<br><br>
+                Primero se erosiona la imágen para
+                separar frutas pegadas por pequeños cabos, se filtran áreas pequeñas (ahora teniendo en cuenta el tamaño de
+                bananas y mangos correspondientemente) y se aplica luego un CLOSE para suavizar las componentes.<br><br> Sobre esta imágen binaria se obtienen los contornos, y para suavizar los mismos se aplican distintos procedimientos según la fruta. Para los mangos se aplica un Convex Hull, y para las bananas un Approx Poly (se evita la Convex Hull pues al ser las bananas formas alargadas, ciertas configuraciones de bananas pegadas pueden generar una Convex Hull que incluya mucho fondo en comparación a la fruta).<br><br>
+                Teniendo los contornos, se decide si el contorno delimita a una o más frutas (y cuantas) en función del área encerrada (por si hay dos frutas pegadas y el contorno detectado es el de ambas juntas). Entonces se obtiene la cantidad de frutas en la imágen y los contornos que delimitan a las mismas.
+            </li>
+          </ul>
+
+          <p>
+              En todo este proceso de detección hay parámetros que debieron ser seteados para optimizar el funcionamiento,
+              como los parámetros del detector de círculos de Hough (radio mínimo, máximo, distancia mínima entre círculos,
+              umbral de votos, etc) y otros como el tamaño del núcleo para las operaciones morfológicas.<br><br>
+              Para agilizar este proceso y obtener la solución más eficiente, se usó la librería de Python “Optuna”,
+              la cual permite optimizar una serie de parámetros de un proceso utilizando optimización Bayesiana en función de una métrica final, la cual en
+              nuestro caso era el porcentaje de acierto al contar las frutas de la imágen (suponiendo en todo momento que el clasificador no falla).
+          </p>
+          <br><br><br><br><br><br>
+
+
+
+
+
+        </div>
+
+        <div class="side">
+
+        </div>
+
+      </div>
+
+      <div class="footer">
+
+        <a href="https://github.com/Facundo-GP/FruitDetector">Código completo del proyecto</a>
+
+        <div class="footer-title">
+          <h1>Integrantes</h1>
+        </div>
+
+        <div class="integrant-container">
+          <div class="integrant">
+            <p>Ivan Abatte</p>
+            <p>CI: 4.966.568-1</p>
+            <p>Mail: ivanabatte@gmail.com</p>
+          </div>
+          <div class="integrant">
+            <p>Facundo Guillén</p>
+            <p>CI: 5.202.598-9</p>
+            <p>Mail: facundoguiper@gmail.com</p>
+
+
+          </div>
+          <div class="integrant">
+            <p>Santiago Sarachu</p>
+            <p>CI: 5.265.161-1</p>
+            <p>Mail: santiago.sarachu@gmail.com</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <script src="js/script.js"></script>
+  </body>
+</html>

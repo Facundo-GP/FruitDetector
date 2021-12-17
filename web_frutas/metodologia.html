@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FruitDetector</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+
+    <div class="loader"><img src="assets/images/loader.gif" alt=""> </div>
+    <div class="flex-container">
+
+      <nav class="menu" id='top-menu'>
+
+          <div class="menu-logo">
+            <img src="assets/images/fing.png" alt="">
+          </div>
+
+          <div class="menu-logo">
+            <img src="assets/images/iie.png" alt="">
+          </div>
+
+          <div class="menu-logo" id="last-logo">
+            <img src="assets//images/dps.png" alt="">
+          </div>
+
+          <div class="menu-item">
+            <a href="index.html">Introducción</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href="metodologia.html" >Metodología</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href="detector.html" >Detector</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href ="experimentos.html">Experimentos</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href="resultados.html">Resultados</a>
+            <div class="line"></div>
+          </div>
+
+      </nav>
+        <div class="title">
+          <div class="fruit-detector-container">
+            <div id="fruit-loading">
+              <h1>Fruit</h1>
+            </div>
+            <div id="detector-loading">
+              <h1>Detector</h1>
+            </div>
+          </div>
+          <p id="subtitle-loading">Implementación de un detector y contador de frutas</p>
+        </div>
+
+
+      <div class="main">
+        <div class="side">
+
+        </div>
+
+        <div class="content">
+          <h2>Metodología</h2>
+          <p>
+            Tras ver que el enfoque usado para detectar las frutas en la imágen era bastante distinto dependiendo del
+            tipo de la misma, y que no se podía generalizar en un único método válido para las 6, se decidió separar el
+            problema en 2 partes.
+
+          </p><br>
+          <ul>
+            <li>
+                Clasificación: Está parte consiste en, dada una imágen sin ninguna etiqueta, identificar cuál de las 6
+                frutas está presente en la imágen.
+            </li>
+            <li>
+                Detección: En está etapa, ya conocida cual es la fruta que aparece en la imágen, se buscará detectar la
+                cantidad y posición de todas las frutas que haya en la bandeja.
+            </li>
+          </ul>
+
+          <p>
+              Para la clasificación se consideraron dos posibles enfoques, Random Forest y Red Convolucional.
+          </p>
+
+          <h3>Random Forest con características de la imágen</h3>
+
+          <p>
+              Este primer método más apegado a las herramientas del curso plantea la siguiente cadena de procesamiento
+              para poder extraer características relevantes de la imágen que nos ayuden a clasificar según la fruta.
+          </p>
+
+          <div style="display:flex; flex-direction:column; padding-top:5%;">
+              <div style="display:flex; flex-direction:row">
+                 <img src="assets/images/clasificador/clasificador.png" style="margin-left: auto;margin-right: auto;  width:80%; height:auto;">
+              </div>
+              <p class="desc" style="padding-top: 0%;padding-bottom:2%;">Diagrama del clasificador</p>
+          </div>
+
+          <ul>
+            <li>
+                <b>Escala de color:</b><br><br>
+                Pasar la escala de color de RGB a YUV. Esto debido a que el fondo de las imágenes (la bandeja) es plateada
+                (gris, sin color), y las frutas generalmente tienen una componente de color (salvo las ciruelas que son casi
+                negras); por lo tanto se buscó pasar a una escala de color donde se separe la intensidad del color. Esto fue
+                inspirado en la forma en que la televisión analogica solía enviar la señal en color, enviando por una parte
+                la intensidad (señal Y, imágen blanco y negro) y por otra parte las dos componentes de color (U y V). Si bien
+                también se probaron otras escalas, por ejemplo HSV como sugerían otros trabajos con objetivos similares, al
+                final se observó cualitativamente que era mejor usar los canales U y V.
+            </li>
+            <li>
+                <b>Umbralizado:</b><br><br>
+                Se realiza una umbralización de Otsu sobre estos dos canales. El objetivo de esta umbralización es separar la
+                fruta del fondo en función de lo que se comentó antes de la ausencia de color del fondo, que hace que en estos
+                canales sea fácil distinguir el fondo de la fruta. Luego se toma el OR pixel a pixel entre las dos imágenes
+                umbralizadas para obtener información de los dos canales y hacer una binarización más robusta.
+            </li>
+            <li>
+                <b>Operaciones morfológicas:</b><br><br>
+                Debido a las manchas de luz presentes y a otras imperfecciones de la imágen, las imágenes binarizadas pueden
+                presentar huecos o manchas no deseadas, por eso en esta etapa utilizaremos operaciones morfológicas para sanear
+                estos defectos. Primero un OPEN para eliminar pequeñas manchas dispersas en el fondo, y luego se rellenan huecos
+                para eliminar justamente los huecos que pueden aparecer en las frutas. Se probó con distintos elementos estructurantes
+                para mejorar el desempeño en ciertos tipos de oclusión para separar pequeños cabos, sin embargo los mejores resultados
+                se dieron con un núcleo uniforme.
+            </li>
+            <li>
+                <b>Filtrado por área y suavizado:</b><br><br>
+                Para eliminar pequeñas manchas que aún persisten, se filtra por área, eliminando las regiones que no tengan cierta
+                área mínima determinada experimentalmente a partir de la fruta más pequeña..<br><br>
+                Los bordes de la imágen binarizada se suavizan aplicando un Blur con un filtro de mediana. Y se obtiene finalmente
+                una imágen binarizada que sirve como máscara de donde hay fruta y dónde fondo.
+            </li>
+            <li>
+                <b>Extracción de características:</b><br><br>
+                Utilizando la máscara se puede calcular ahora el color medio (en RGB, vector de 3 dimensiones), y también calcular
+                otras características de los bordes de la imagen binarizada, por ejemplo los que se terminaron utilizando fueron:
+                área y perímetro de la sección más chica detectada (buscando que sea una fruta separada y no la oclusión de varias)
+                , y circularidad de la misma (con el objetivo de medir que tan redonda o no es la fruta).<br><br>
+                Hecho este proceso se puede obtener para cada imágen entonces un vector de 6 características que busca distinguir a
+                las frutas (justamente 6 también). Entonces entrenamos un Random Forest con los vectores de cada fruta del subset
+                (usando como etiquetas el tipo de fruta). Se decidió usar un Random Forest sobre otros como KNN o SVM debido a su
+                robustez y la interpretabilidad que brinda.
+            </li>
+          </ul>
+
+          <p>Usando esta técnica se alcanza un rendimiento del 90% de acierto, teniendo las mayores confusiones con
+            las ciruelas, para las cuales el proceso de separación del fondo no es tan efectivo.
+          </p>
+
+          <h3>Red Convolucional</h3>
+
+          <p>
+            Por otro lado, en Kaggle junto con la base de datos (que estaba asociada a una competencia de
+            clasificación) hay una red convolucional de no mucha complejidad, ya entrenada, capaz de obtener
+            una tasa de acierto de un 99.9% (sobre la variedad original de 16 frutas).
+          </p><br>
+
+          <p>
+            Si bien la primera opción está más apegada a lo tratado en el curso, la segunda obtiene un desempeño
+            mucho mayor y con el objetivo de no introducir un cuello de botella para la segunda etapa (detección)
+            optamos por usar la red convolucional y suponer entonces que el error final obtenido será el cometido en la
+            etapa de detección (que es en la que más nos enfocaremos) y no en la de clasificación.
+          </p><br>
+
+          <br><br><br><br><br><br>
+
+        </div>
+
+        <div class="side">
+
+        </div>
+
+      </div>
+
+      <div class="footer">
+
+        <a href="https://github.com/Facundo-GP/FruitDetector">Código completo del proyecto</a>
+
+        <div class="footer-title">
+          <h1>Integrantes</h1>
+        </div>
+
+        <div class="integrant-container">
+          <div class="integrant">
+            <p>Ivan Abatte</p>
+            <p>CI: 4.966.568-1</p>
+            <p>Mail: ivanabatte@gmail.com</p>
+          </div>
+          <div class="integrant">
+            <p>Facundo Guillén</p>
+            <p>CI: 5.202.598-9</p>
+            <p>Mail: facundoguiper@gmail.com</p>
+
+
+          </div>
+          <div class="integrant">
+            <p>Santiago Sarachu</p>
+            <p>CI: 5.265.161-1</p>
+            <p>Mail: santiago.sarachu@gmail.com</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <script src="js/script.js"></script>
+  </body>
+</html>

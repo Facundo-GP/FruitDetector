@@ -1,0 +1,605 @@
+/*------------------------------------------------------styles.css ---------------------------------------------------*/
+
+
+
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  zoom: 80%;
+  background-image: linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.35)), url("../assets/images/background.jpg");
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+.header {
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  margin: 0px;
+  padding: 0px;
+
+}
+
+
+
+
+/*------------------------------------------------------loader.css ---------------------------------------------------*/
+
+
+
+
+.loader {
+  height:125vh;
+  width: 125vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+}
+
+.loader img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 17%;
+}
+
+#show-loader img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 17%;
+}
+
+
+@keyframes loader {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+#quit-loader{
+  animation: loader 0.25s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes  flex{
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+}
+
+
+.flex-container {
+  animation: flex 0.5s;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+}
+
+
+
+
+/*------------------------------------------------------menu.css ---------------------------------------------------*/
+
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  height: 8vw;
+  top: 0px;
+}
+
+.menu-item {
+  height: 30%;
+  padding-top: 2%;
+  padding-bottom:1vw;
+  margin-left:2%;
+  margin-right:2%;
+}
+
+.menu-logo {
+  margin-right: 3%;
+}
+
+#top-menu {
+  background-color transparent;
+  transition: background-color 0.5s;
+
+}
+
+#top-menu .menu-logo > img {
+  opacity: 0;
+  width: 100%;
+  transition:  opacity 0.25s;
+}
+
+#scroll-menu {
+  background-color: white;
+  transition: background-color 0.5s;
+  z-index: 10;
+}
+
+
+#scroll-menu .menu-item > a {
+  color: black;
+  transition: color 0.5s;
+}
+
+#scroll-menu .menu-logo > img{
+  opacity 1;
+  width: 100%;
+  transition: opacity 1.2s;
+
+}
+
+
+
+
+
+.line {
+  height: 2px;
+  width: 100%;
+}
+
+
+@keyframes line-animation {
+        0% {width: 0%;}
+        100% {width: 100%;}
+    }
+
+.menu-item:hover > .line {
+  background: red;
+  animation: line-animation 0.1s linear;*/
+  }
+
+
+
+.menu-item a:link {
+  font-size: calc(6px + (25 - 6) * ((100vw - 300px) / (1600 - 300)));
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  color: rgb(0,0,0,1.0);
+  text-decoration: none;
+}
+
+.menu-item a:visited {
+  font-size: calc(6px + (25 - 6) * ((100vw - 300px) / (1600 - 300)));
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  color: rgb(0,0,0,1.0);
+  text-decoration: none;
+}
+
+
+@keyframes link-animation {
+        0% {color: black;}
+        100% {color: red;}
+    }
+
+.menu-item:hover > a {
+  animation: link-animation linear 0.2s;
+  animation-fill-mode: forwards;
+}
+
+
+
+
+/*------------------------------------------------------title.css ---------------------------------------------------*/
+
+
+
+
+.title {
+  width: 100%;
+  height: 40vw;
+  padding-top:3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+.fruit-detector-container{
+  display: flex;
+  flex-direction: row;
+}
+
+
+
+@keyframes fruit-animation {
+    0% {
+      margin-left:-400%;
+    }
+    45% {
+      margin-left:70%;
+      animation-timing-function: cubic-bezier(0.25, 0.01, 0.55, 0.16);
+    }
+    75% {
+        margin-left:-40%;
+        animation-timing-function: cubic-bezier(0.52, 0.44, 0.47, 0.44);
+    }
+
+    90% {
+      margin-left: 20%;
+      animation-timing-function: cubic-bezier(0.53, 0.56, 0.48, 0.56);
+    }
+
+    100% {
+        margin-left:0%;
+        animation-timing-function: cubic-bezier(0.45, 0.84, 0.75, 0.99);
+    }
+}
+
+
+@keyframes detector-animation {
+  0% {
+    visibility: hidden;
+    margin-top: -400%;
+
+  }
+  55% {
+    visibility: visible;
+    margin-top: -400%;
+  }
+
+  85% {
+    margin-top: 0%;
+    animation-timing-function: ease-out;
+  }
+  92.5% {
+    margin-top:-20%;
+    animation-timing-function: ease-in;
+  }
+  100% {
+    visibility: visible;
+    margin-top:0%;
+    animation-timing-function: linear;
+  }
+
+}
+
+@keyframes subtitle-animation {
+  from {
+    visibility: visible;
+    color: transparent;
+  }
+  to {
+    visibility: visible;
+    color: black;
+  }
+
+}
+
+
+@keyframes title-animation {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+
+}
+
+
+.title div > h1 {
+  font-size: calc(32px + (90 - 32) * ((100vw - 300px) / (1600 - 300)));
+  text-align: center;
+
+  background: linear-gradient(to right, red, blue);
+  background-size: 200% auto;
+
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+#fruit-loading {
+  visibility: hidden;
+}
+
+#detector-loading {
+  visibility: hidden;
+}
+
+#subtitle-loading {
+  visibility: hidden;
+}
+
+#fruit{
+
+  animation-name: fruit-animation, title-animation;
+  animation-duration: 2s, 0.5s;
+  animation-delay: 0ms,4.325s;
+  animation-iteration-count: 1, 1;
+}
+
+#detector{
+
+  visibility: hidden;
+  animation-name: detector-animation, title-animation;
+  animation-duration: 2s, 0.5s;
+  animation-delay: 1.325s,4.325s;
+  animation-iteration-count: 1, 1;
+  animation-fill-mode: forwards, forwards;
+}
+
+#subtitle{
+  visibility: hidden;
+  animation: subtitle-animation 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 3s;
+}
+
+
+.title p {
+  font-size: calc(12px + (30 - 12) * ((100vw - 300px) / (1600 - 300)));
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 10%;
+
+}
+
+
+
+
+/*------------------------------------------------------main.css ---------------------------------------------------*/
+
+
+
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+}
+
+.side {
+  padding-top: 150px;
+  width: 7.5%;
+  background-color: #FF6F61;
+}
+
+.content {
+  padding-top: 7.5%;
+  width: 85%;
+
+}
+
+.content h2 {
+  text-align: center;
+  font-size: calc(22px + (48 - 22) * ((100vw - 300px) / (1600 - 300)));
+  color: black;
+  padding-bottom: 5%;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.content h3 {
+  text-align: center;
+  font-size: calc(18px + (32 - 18) * ((100vw - 300px) / (1600 - 300)));
+  color: black;
+  padding-top: 5%;
+  padding-bottom: 3%;
+  font-style: italic;
+  font-weight: bold;
+}
+
+
+.content > p{
+  text-align: left;
+  font-size: calc(12px + (26 - 12) * ((100vw - 300px) / (1600 - 300)));
+  color: #34568B;
+  padding-right: 10%;
+  padding-left: 11%;
+}
+
+.desc{
+  text-align: center;
+  font-size: calc(8px + (20 - 8) * ((100vw - 300px) / (1600 - 300)));
+  color: #34568B;
+  font-style: italic;
+  font-weight: bold;
+  padding-top: 5%;
+  padding-bottom: 8%;
+}
+.content ul{
+  text-align: left;
+  color: #34568B;
+  /*padding-right: 200px;
+  padding-left: 230px;
+  */
+  padding-right: 15%;
+  padding-left: 16%;
+  /*padding-top: 30px;
+  padding-bottom: 30px*/
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.content li {
+  font-size: calc(10px + (22 - 10) * ((100vw - 300px) / (1600 - 300)));
+  padding-bottom: 3%;
+  
+}
+
+.content li::marker {
+  font-size: calc(16px + (32 - 16) * ((100vw - 300px) / (1600 - 300)));
+  font-weight: blod;
+
+}
+
+.content-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+
+
+/*Tabla*/
+.wrapper {
+  margin: 0 auto;
+  padding: 5%;
+  width: 60%;
+  /*transform: scale(1.5);*/
+}
+
+.table {
+  margin: 0 0 5% 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+
+
+.row {
+  display: table-row;
+  background: #f6f6f6;
+    font-size: calc(8px + (26 - 8) * ((100vw - 300px) / (1600 - 300)));
+}
+.row:nth-of-type(odd) {
+  background: #e9e9e9;
+}
+.row.header {
+  font-weight: 900;
+  color: #ffffff;
+  background: #ea6153;
+}
+.row.green {
+  background: #27ae60;
+}
+.row.blue {
+  background: #2980b9;
+}
+
+.cell {
+  padding: 1% 2%;
+  display: table-cell;
+}
+
+
+
+
+/*------------------------------------------------------footer.css ---------------------------------------------------*/
+
+
+
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(170,170,170);
+}
+
+.footer-title {
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.footer-title h1 {
+    font-size: calc(22px + (48 - 22) * ((100vw - 300px) / (1600 - 300)));
+  color: black;
+  margin:auto;
+
+  background: linear-gradient(to right, red, blue);
+  background-size: 200% auto;
+
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.integrant-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+}
+
+.integrant {
+  width: 33%;
+  text-align: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 3%;
+
+
+}
+
+.integrant > p {
+  color: black;
+    /* font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width]))); */
+  font-size: calc(6px + (24 - 6) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.footer > a{
+  padding-top:30px;
+      font-size: calc(14px + (24 - 14) * ((100vw - 300px) / (1600 - 300)));
+  color: black;
+  margin:auto;
+
+  background: linear-gradient(to right, red, blue);
+  background-size: 200% auto;
+
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}

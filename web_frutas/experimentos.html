@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FruitDetector</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+
+    <div class="loader"><img src="assets/images/loader.gif" alt=""> </div>
+    <div class="flex-container">
+
+      <nav class="menu" id='top-menu'>
+
+          <div class="menu-logo">
+            <img src="assets/images/fing.png" alt="">
+          </div>
+
+          <div class="menu-logo">
+            <img src="assets/images/iie.png" alt="">
+          </div>
+
+          <div class="menu-logo" id="last-logo">
+            <img src="assets//images/dps.png" alt="">
+          </div>
+
+          <div class="menu-item">
+            <a href="index.html">Introducción</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href="metodologia.html" >Metodología</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href="detector.html" >Detector</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href ="experimentos.html">Experimentos</a>
+            <div class="line"></div>
+          </div>
+          <div class="menu-item">
+            <a href="resultados.html">Resultados</a>
+            <div class="line"></div>
+          </div>
+
+      </nav>
+        <div class="title">
+          <div class="fruit-detector-container">
+            <div id="fruit-loading">
+              <h1>Fruit</h1>
+            </div>
+            <div id="detector-loading">
+              <h1>Detector</h1>
+            </div>
+          </div>
+          <p id="subtitle-loading">Implementación de un detector y contador de frutas</p>
+        </div>
+
+
+      <div class="main">
+        <div class="side">
+
+        </div>
+
+        <div class="content">
+          <h2>Experimentos</h2>
+
+          <p>
+              Esta sección está dedicada a mostrar en forma visual los experimentos realizados con el detector.<br>
+              Para ello se mostrarán ejemplos de detección para las diferentes frutas del dataset tanto en casos
+              de acierto cono de falla y también en el conjunto de test.
+          </p>
+
+        <p style="padding-top:3%;text-align:center"><b>Kiwis</b><br><br></p>
+
+          <div style="display:flex; flex-direction:column; padding-top:4%;">
+              <div style="display:flex; flex-direction:row">
+                 <img src="assets/images/experimentos/kiwis_correcto.png" style="margin-left: auto;margin-right: 5%; transform: scale(1.3); width:20%; height:auto;">
+                 <img src="assets/images/experimentos/kiwis_incorrecto.png" style="margin-left: 5%;margin-right: 5%; transform: scale(1.3);  width:20%; height:auto;">
+                 <img src="assets/images/experimentos/kiwis_test.png" style="margin-left: 5%;margin-right: auto; transform: scale(1.3);  width:20%; height:auto;">
+              </div>
+              <p class="desc">Ejemplos de detección correcta,incorrecta y en test para kiwis respecticamente</p>
+          </div>
+
+        <p style="text-align:center;"> <b>Naranjas</b><br><br></p>
+
+          <div style="display:flex; flex-direction:column; padding-top:4%;">
+              <div style="display:flex; flex-direction:row">
+                 <img src="assets/images/experimentos/naranjas_correcto.png" style="margin-left: auto;margin-right: 5%; transform: scale(1.3); width:20%; height:auto;">
+                 <img src="assets/images/experimentos/naranjas_incorrecto.png" style="margin-left: 5%;margin-right: 5%; transform: scale(1.3);  width:20%; height:auto;">
+                 <img src="assets/images/experimentos/naranjas_test.png" style="margin-left: 5%;margin-right: auto; transform: scale(1.3);  width:20%; height:auto;">
+              </div>
+              <p class="desc">Ejemplos de detección correcta,incorrecta y en test para naranjas respecticamente</p>
+          </div>
+
+          <p style="text-align:center;"><b>Ciruelas</b><br><br></p>
+
+
+          <div style="display:flex; flex-direction:column; padding-top:4%;">
+              <div style="display:flex; flex-direction:row">
+                 <img src="assets/images/experimentos/ciruelas_correcto.png" style="margin-left: auto;margin-right: 5%; transform: scale(1.3); width:20%; height:auto;">
+                 <img src="assets/images/experimentos/ciruelas_incorrecto.png" style="margin-left: 5%;margin-right: 5%; transform: scale(1.3);  width:20%; height:auto;">
+                 <img src="assets/images/experimentos/ciruelas_test.png" style="margin-left: 5%;margin-right: auto; transform: scale(1.3);  width:20%; height:auto;">
+              </div>
+              <p class="desc">Ejemplos de detección correcta,incorrecta y en test para ciruelas respecticamente</p>
+          </div>
+
+          <p style="text-align:center;"> <b>Mangos</b><br><br></p>
+
+          <div style="display:flex; flex-direction:column; padding-top:4%;">
+              <div style="display:flex; flex-direction:row">
+                 <img src="assets/images/experimentos/mangos_correcto.jpeg" style="margin-left: auto;margin-right: 5%; transform: scale(1.3); width:20%; height:auto;">
+                 <img src="assets/images/experimentos/mangos_incorrecto.jpeg" style="margin-left: 5%;margin-right: 5%; transform: scale(1.3);  width:20%; height:auto;">
+                 <img src="assets/images/experimentos/mangos_test.jpeg" style="margin-left: 5%;margin-right: auto; transform: scale(1.3);  width:20%; height:auto;">
+
+              </div>
+              <p class="desc">Ejemplos de detección correcta,incorrecta y en test para mangos respecticamente</p>
+          </div>
+
+          <p style="text-align:center;"> <b>Manzanas</b><br><br></p>
+
+          <div style="display:flex; flex-direction:column; padding-top:4%;">
+              <div style="display:flex; flex-direction:row">
+                 <img src="assets/images/experimentos/manzanas_correcto.jpeg" style="margin-left: auto;margin-right: 5%; transform: scale(1.3); width:20%; height:auto;">
+                 <img src="assets/images/experimentos/manzanas_incorrecto.jpeg" style="margin-left: 5%;margin-right: 5%; transform: scale(1.3);  width:20%; height:auto;">
+                 <img src="assets/images/experimentos/manzanas_test.jpeg" style="margin-left: 5%;margin-right: auto; transform: scale(1.3);  width:20%; height:auto;">
+
+              </div>
+              <p class="desc">Ejemplos de detección correcta,incorrecta y en test para manzanas respecticamente</p>
+          </div>
+
+          <p style="text-align:center;"> <b>Bananas</b><br><br></p>
+
+          <div style="display:flex; flex-direction:column; padding-top:4%;">
+              <div style="display:flex; flex-direction:row">
+                 <img src="assets/images/experimentos/bananas_correcto.jpeg" style="margin-left: auto;margin-right: 5%; transform: scale(1.3); width:20%; height:auto;">
+                 <img src="assets/images/experimentos/bananas_incorrecto.jpeg" style="margin-left: 5%;margin-right: 5%; transform: scale(1.3);  width:20%; height:auto;">
+                 <img src="assets/images/experimentos/bananas_test.jpeg" style="margin-left: 5%;margin-right: auto; transform: scale(1.3);  width:20%; height:auto;">
+
+              </div>
+              <p class="desc">Ejemplos de detección correcta,incorrecta y en test para bananas respecticamente</p>
+          </div>
+
+
+          <p>
+              Otro experimento que se realizó fue el de testear el detector con fotos caseras con un fondo
+              parecido al de las imágenes del dataset, se obtuvieron algunos buenos resultados como se muestra
+              en las figuras.
+          </p>
+
+          <div style="display:flex; flex-direction:column; padding-top:10%;">
+              <div style="display:flex; flex-direction:row">
+                 <img src="assets/images/experimentos/detectadas_nuestra_1.jpeg" style="margin-left: auto;margin-right: 5%; transform: scale(1.3); width:20%; height:auto;">
+                 <img src="assets/images/experimentos/detectadas_nuestra_2.jpeg" style="margin-left: 5%;margin-right: auto; transform: scale(1.3);  width:20%; height:auto;">
+              </div>
+              <p class="desc">Imágenes propias detectadas y clasificadas correctamente</p>
+          </div>
+
+          <p>
+            Sin embargo, para otras imágenes el clasificador falló y por consecuencia la detección no fue buena.<br>
+            Para estas imágenes se seleccionó el detector adecuado manualmente y la detección fue correcta.
+          </p>
+
+          <div style="display:flex; flex-direction:column; padding-top:10%;">
+              <div style="display:flex; flex-direction:row">
+                 <img src="assets/images/experimentos/no_detectada_1.jpeg" style="margin-left: auto;margin-right: 5%; transform: scale(1.3); width:20%; height:auto;">
+                 <img src="assets/images/experimentos/no_detectada_2.jpeg" style="margin-left: 5%;margin-right: 5%; transform: scale(1.3);  width:20%; height:auto;">
+                 <img src="assets/images/experimentos/no_detectada_3.jpeg" style="margin-left: 5%;margin-right: auto; transform: scale(1.3);  width:20%; height:auto;">
+              </div>
+              <p class="desc">Imágenes propias detectadas pero no clasificadas correctamente</p>
+          </div>
+
+
+          <br><br><br><br><br><br>
+        </div>
+
+        <div class="side">
+
+        </div>
+
+      </div>
+
+      <div class="footer">
+
+        <a href="https://github.com/Facundo-GP/FruitDetector">Código completo del proyecto</a>
+
+        <div class="footer-title">
+          <h1>Integrantes</h1>
+        </div>
+
+        <div class="integrant-container">
+          <div class="integrant">
+            <p>Ivan Abatte</p>
+            <p>CI: 4.966.568-1</p>
+            <p>Mail: ivanabatte@gmail.com</p>
+          </div>
+          <div class="integrant">
+            <p>Facundo Guillén</p>
+            <p>CI: 5.202.598-9</p>
+            <p>Mail: facundoguiper@gmail.com</p>
+
+
+          </div>
+          <div class="integrant">
+            <p>Santiago Sarachu</p>
+            <p>CI: 5.265.161-1</p>
+            <p>Mail: santiago.sarachu@gmail.com</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <script src="js/script.js"></script>
+  </body>
+</html>
