@@ -14,7 +14,7 @@ class FruitDetector():
 
             @stats(aplicar=analysis,fruta="bananas",separar=split)
             def detectar_banana(self_aux,img,th = 86,th_filtro_area = 343,th1_canny =247,th2_canny=6, erode_kernel = 8,
-                                close_kernel = 1,base_area=2845, blur_dim_fondo = 3,morph_kernel_fondo = 11, 
+                                close_kernel = 4,base_area=2845, blur_dim_fondo = 3,morph_kernel_fondo = 11, 
                                 area_th_fondo = 1829, eps = 0.004685190931126466, show_img=False):
 
 
